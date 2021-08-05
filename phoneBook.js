@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 morgan.token("content", (request) => {
-    return JSON.stringify(request.body);
+    return request.method === "POST" ? JSON.stringify(request.body) : " ";
 });
 
 app.use(
