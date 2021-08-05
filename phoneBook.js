@@ -34,4 +34,15 @@ app.get("/api/persons", (request, response) => {
     response.send(data);
 });
 
-app.listen(3001);
+app.get("/info", (request, response) => {
+    response.send(
+        `<p>Phonebook has info for ${data.length} people.</p>
+        <p>${new Date()}</p>`
+    );
+});
+
+const PORT = 3001;
+
+app.listen(PORT);
+
+console.log(`Now listening on PORT ${PORT}`);
