@@ -30,15 +30,23 @@ const data = [
 
 // GET Requests
 
-app.get("/api/persons", (request, response) => {
-    response.send(data);
-});
-
+// Info page
 app.get("/info", (request, response) => {
     response.send(
         `<p>Phonebook has info for ${data.length} people.</p>
         <p>${new Date()}</p>`
     );
+});
+
+// Persons
+app.get("/api/persons", (request, response) => {
+    response.json(data);
+});
+
+app.get("/api/persons/:id", (request, response) => {
+    let person = data.find((person) => person.id === Number(request.params.id));
+
+    person ? response.json(person) : response.status(404).end();
 });
 
 const PORT = 3001;
