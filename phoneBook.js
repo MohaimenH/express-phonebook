@@ -57,6 +57,10 @@ app.post("/api/persons", (request, response) => {
         return response.status(400).json({ error: "name or number missing" });
     }
 
+    if (data.find((person) => person.name == body.name)) {
+        return response.status(400).json({ error: "number already exists" });
+    }
+
     let id = Math.floor(Math.random() * 999999999);
     data = data.concat({ id: id, name: body.name, number: body.number });
     response.status(201).json({ id: id, name: body.name, number: body.number });
